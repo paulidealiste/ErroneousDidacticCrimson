@@ -1,0 +1,165 @@
+---
+scraper:
+  targets:
+    - name: French names
+      slug: frn
+      type: NAMES
+      content:
+        - address: https://en.wikipedia.org/w/index.php?title=Category:French_feminine_given_names&pageuntil=Paule+%28name%29#mw-pages
+          selectors:
+            - .mw-category-group ul li > a
+          regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:French_feminine_given_names&pagefrom=Paule+%28name%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:French_masculine_given_names&pageuntil=Lauren#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:French_masculine_given_names&pagefrom=Lauren#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    # - name: French surnames
+    #   slug: frs
+    #   type: SURNAMES
+    #   content:
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:French-language_surnames&pageuntil=Bo%C3%ABsset#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:French-language_surnames&pagefrom=Bo%C3%ABsset#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:French-language_surnames&pagefrom=Cherbuliez#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:French-language_surnames&pagefrom=Dionne+%28Name%29%0ADionne+%28name%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:French-language_surnames&pagefrom=Gilson+%28name%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:French-language_surnames&pagefrom=Lavanchy#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:French-language_surnames&pagefrom=Neveux#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:French-language_surnames&pagefrom=Serre+%28surname%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    # - name: English names
+    #   slug: enn
+    #   type: NAMES
+    #   content:
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English_feminine_given_names&pageuntil=Dorothy+%28given+name%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English_feminine_given_names&pagefrom=Dorothy+%28given+name%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English_feminine_given_names&pagefrom=Kim+%28given+name%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English_feminine_given_names&pagefrom=Petunia+%28given+name%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English_masculine_given_names&pageuntil=Denzel#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English_masculine_given_names&pagefrom=Denzel#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English_masculine_given_names&pagefrom=Jess#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English_masculine_given_names&pagefrom=Randolph+%28given+name%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    # - name: English surnames
+    #   slug: ens
+    #   type: SURNAMES
+    #   content:
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pageuntil=Barlow+%28surname%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Barlow+%28surname%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Boothe#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Cartridge+%28surname%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Cruse+%28surname%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Ellison#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Goggin#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Henman+%28surname%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Jenkinson#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Linwood+%28name%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Mirams#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Pearson+%28surname%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Ridgway+%28name%29#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Slaight#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Tidwell#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
+    #     - address: https://en.wikipedia.org/w/index.php?title=Category:English-language_surnames&pagefrom=Whiffen#mw-pages
+    #       selectors:
+    #         - .mw-category-group ul li > a
+    #       regexp: ^\S*
