@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './helpers'
+require_relative 'helpers'
 
 # ConfigApprovals module holds the all app configuration objects in separate classes
 module ConfigApprovals

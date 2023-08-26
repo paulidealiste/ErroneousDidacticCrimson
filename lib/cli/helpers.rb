@@ -19,7 +19,9 @@ end
 # CliDatabase holds all the database REPL callable methods
 module CliDatabase
   def connect_to_database
-    DatabaseRegistrar::Storage.new
+    db = DatabaseRegistrar::Storage.new
+    puts 'Database connected!'
+    db
   end
 
   def fill_via_webscraping(db)

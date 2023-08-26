@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require 'optparse'
-require_relative './helpers'
+require_relative 'helpers'
+require 'pry'
 
 # CliGuide module exposes the cli user interface for all the database operations and data retreival
 module CliGuide
@@ -11,6 +12,15 @@ module CliGuide
   # Welcome options and initial app methods
   class Welcome
     include CliHanlders
+    def initialize
+      @available = {
+        scrape: scraping,
+        csv: csving,
+        database: databasing,
+        webapp: webapping
+      }
+    end
+
     def parse
       @options = {}
       OptionParser.new do |opts|
@@ -27,18 +37,9 @@ module CliGuide
 
     def act_on_options
       @options.each do |key, value|
-        case key
-        when :scrape
-          preconfigured_scraping if value == true
-        when :csv
-          p 'csv stub!'
-        when :database
-          DatabaseRepl.new.run if value == true
-        when :webapp
-          bootstrap_webapp if value == true
-        else
-          raise UnknownParameter
-        end
+        raise UnknownParameter unless value == true && @available.key?(key)
+
+        @available[key].call
       end
     end
 
@@ -50,7 +51,8 @@ module CliGuide
     end
 
     def on_wsc(opts)
-      opts.on('-s', '--scrape', 'Web scraping from the pre-configured targers to stdout.') do
+      opts.on('-s', '--scrape', 'Web scraping from the pr
+      stats: -> { repl_stats }e-configured targers to stdout.') do
         @options[:scrape] = true
       end
     end
@@ -71,6 +73,22 @@ module CliGuide
       opts.on('-w', '--webapp', 'Start dedicated localhost webapp.') do
         @options[:webapp] = true
       end
+    end
+
+    def scraping
+      -> { preconfigured_scraping }
+    end
+
+    def csving
+      -> { p 'csv implementation is a stub!' }
+    end
+
+    def databasing
+      -> { DatabaseRepl.new.run }
+    end
+
+    def webapping
+      -> { bootstrap_webapp }
     end
   end
 
@@ -101,28 +119,21 @@ module CliGuide
       loop do
         print "[#{Time.new.strftime('%Y/%m/%d %k:%M:%S')}#{' c' if @db}] >> "
         prompt = gets.chomp
-        case prompt
-        when 'connect'
-          @db = connect_to_database
-          puts 'An instance of the database has been connected.'
-        when 'from_scrape'
-          repl_from_scrape
-        when /retreive [0-9]+$/
-          repl_retreive(prompt[/[0-9]+$/].to_i)
-        when /from_csv (([^ ]+)\s{1})(\w+)(\s{1})(\w+)(\s{1})(\w+)/
-          repl_from_csv(prompt)
-        when 'help'
-          help_message
-        when 'stats'
-          repl_stats
-        when 'quit'
-          break unless @db
+        prompt == 'quit' ? break : nil
 
-          disconnect_from_database(@db)
-        else
-          puts 'Not implemented, unknown or just plain bad command.'
-        end
+        repl_db_quit(prompt)
+        repl_mechanism(prompt)
       end
+    end
+
+    def repl_mechanism(prompt)
+      command = repl_command(prompt)
+      option = repl_option(prompt)
+      command&.call
+      option&.call(prompt)
+      return unless command.nil? && option.nil?
+
+      puts 'Unknown or just plain bad command'
     end
 
     def farewell_message
@@ -136,7 +147,7 @@ module CliGuide
     def help_message
       puts 'connect - connects to an existing or creates a new database'
       puts 'from_scrape - perform web scraping with preconfigured targerts and store the the results'
-      puts 'from_csv [path slug description] - read csv file and store the results as NAMES or SURNAMES'
+      puts 'from_csv [path slug type description] - read csv file and store the results as NAMES or SURNAMES'
       puts 'retreive [n] - retreive n randomized name/surname pairs'
       puts 'stats - print some database statistics'
       puts 'quit - quit this repl and disconnect from the database'
@@ -175,6 +186,30 @@ module CliGuide
       else
         not_connected_message
       end
+    end
+
+    def repl_command(prompt)
+      available = {
+        connect: -> { @db = connect_to_database },
+        from_scrape: -> { repl_from_scrape },
+        help: -> { help_message },
+        stats: -> { repl_stats }
+      }
+      available[prompt.to_sym]
+    end
+
+    def repl_option(prompt)
+      if prompt.match?(/retreive [0-9]+$/)
+        ->(entered) { repl_retreive(entered[/[0-9]+$/].to_i) }
+      elsif prompt.match?(/from_csv (([^ ]+)\s{1})(\w+)(\s{1})(\w+)(\s{1})(\w+)/)
+        ->(entered) { repl_from_csv(entered) }
+      end
+    end
+
+    def repl_db_quit(prompt)
+      return unless @db && prompt == 'quit'
+
+      disconnect_from_database(@db)
     end
   end
 end

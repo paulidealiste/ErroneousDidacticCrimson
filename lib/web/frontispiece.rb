@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'sinatra'
-require_relative './helpers'
+require_relative 'helpers'
 
 set :views, 'lib/web/views'
 
